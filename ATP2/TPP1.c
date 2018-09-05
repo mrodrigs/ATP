@@ -10,8 +10,8 @@
 /*//////////////////PROTÓTIPOS DE FUNÇÃO///////////////////////*/
 /*/////////////////////////////////////////////////////////////*/
 int Menu (void); //MENU
-void insertPol(int *ppol1, int *ppol2, int *ppol3);
-int printfVetor(int V[3]);
+void insertPol(float *ppol1, float *ppol2, float *ppol3);
+void printfVetor(float *ppol1, float *ppol2, float *ppol3, float *ppolres);
 short Continua(void); //CONTINUAÇÃO DO MENU
 void Creditos(void);
 /*/////////////////////////////////////////////////////////////*/
@@ -23,8 +23,8 @@ void Creditos(void);
 /*/////////////////////////////////////////////////////////////*/
 int main (void){
 	int option; 
-	int pol1[20] = {0}, pol2[20] = {0}, pol3[20] = {0}, polres[40] = {0};
-	int teste[2] = {7,9};
+	float pol1[20] = {0}, pol2[20] = {0}, pol3[20] = {0}, polres[40] = {0};
+	
     setlocale(LC_ALL,"");
 	do {
 		option = Menu(); //EXECUÇÃO DO MENU
@@ -34,12 +34,10 @@ int main (void){
 		switch(option) {
 		case 1:
 			insertPol(pol1, pol2, pol3);
-			printfVetor(pol1);
-			system("PAUSE");
 		break;
 
 		case 2:
-			printfVetor(teste);
+			printfVetor(pol1, pol2, pol3, polres);
 			system("PAUSE");
 		break;
 
@@ -139,17 +137,17 @@ int opmenu;
 
 
 /*/////////////////////////////////////////////////////////////*/
-/*//////////xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//////////////////*/
+/*//////////Função para inserção de Polinômios/////////////////*/
 /*/////////////////////////////////////////////////////////////*/
-void insertPol(int *ppol1, int *ppol2, int *ppol3){
+void insertPol(float *ppol1, float *ppol2, float *ppol3){
 	int i, grau, option;
-	int j;
+	float j;
 
 		printf("Inserir Polinômios.\n\n");
 		printf("1 - Inserir o Primeiro Polinômio.\n");
 		printf("2 - Inserir o Segundo Polinômio.\n");
 		printf("3 - Inserir o Terceiro Polinômio.\n");
-		printf("0 - Voltar ao Menu Inicial.\n");
+		printf("0 - Sair.\n");
 		scanf("%d", &option);
 		
 		switch(option) {
@@ -157,22 +155,23 @@ void insertPol(int *ppol1, int *ppol2, int *ppol3){
 			printf("Qual o grau do Polinômio?\n");
 			scanf("%d", &grau);
 			if (grau > 0 && grau < 21){
-				for (i = 0; i < grau; i++){
+				for (i = 0; i <= grau; i++){
 					printf("O coeficiente que multiplica X elevado a %d é:\n", i);
-					scanf("%d", &j);
+					scanf("%f", &j);
 					ppol1[i] = j;
 			}
 			}
 			system("PAUSE");
+			return;
 		break;
 
 		case 2:
 			printf("Qual o grau do Polinômio?\n");
 			scanf("%d", &grau);
 			if (grau > 0 && grau < 21){
-				for (i = 0; i < grau; i++){
+				for (i = 0; i <= grau; i++){
 					printf("O coeficiente que multiplica X elevado a %d é:\n", i);
-					scanf("%d", &j);
+					scanf("%f", &j);
 					ppol2[i] = j;
 			}
 			}
@@ -181,9 +180,9 @@ void insertPol(int *ppol1, int *ppol2, int *ppol3){
 
 		case 3:
 			printf("Qual o grau do Polinômio?\n");
-			scanf("%d", &grau);
+			scanf("%f", &grau);
 			if (grau > 0 && grau < 21){
-				for (i = 0; i < grau; i++){
+				for (i = 0; i <= grau; i++){
 					printf("O coeficiente que multiplica X elevado a %d é:\n", i);
 					scanf("%d", &j);
 					ppol3[i] = j;
@@ -208,11 +207,13 @@ void insertPol(int *ppol1, int *ppol2, int *ppol3){
 /*/////////////////////////////////////////////////////////////*/
 
 
-int printfVetor(int V[3]){
-	int x;
-	for(x = 0; x < 5; x++){
-		printf("%dx^%d ", V[x], x);
+void printfVetor(float *ppol1, float *ppol2, float *ppol3, float *ppol4){
+	int pos = 19;
+	for(; pos >= 0; pos--){
+		if (ppol1[pos] != 0){
+			printf("%.2fx^%d  ", ppol1[pos], pos);
 	}
+}
 	printf("\n\n\n");
 }
 
@@ -236,11 +237,12 @@ int ch;
 }
 
 void Creditos(void){
-	printf("                              Desenvolvido por:\n");
-	printf("Mauricio Gabriel Torres Rodrigues     ||     Carlos Eduardo Gomes Miranda\n");
-	printf("RA: 181252694                         ||     RA: 181251051\n\n");
-	printf("              Curso de Ciências da Computação - 1º Semestre\n");
-	printf("                UNESP -Faculdade de Ciências e Tecnologia\n\n\n");
+	printf("\n\n\n                     Trabalho Prático de Programação 01\n");
+	printf("                              Desenvolvido por:\n\n");
+	printf("                      Mauricio Gabriel Torres Rodrigues\n");
+	printf("                               RA: 181252694\n\n");
+	printf("                Curso de Ciências da Computação - 2º Semestre\n");
+	printf("                  UNESP -Faculdade de Ciências e Tecnologia\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
 /*/////////////////////////////////////////////////////////////*/
 /*/////////////////////////////////////////////////////////////*/
